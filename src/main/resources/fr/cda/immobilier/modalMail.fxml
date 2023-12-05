@@ -10,6 +10,6 @@
         <Label layoutX="84.0" layoutY="84.0" text="Veuillez saisir l'adresse mail de l'expéditeur :" />
         <TextField fx:id="email" layoutX="100.0" layoutY="138.0" prefHeight="25.0" prefWidth="200.0" promptText="Adresse mail de l'epéditeur" />
         <Button fx:id="sendMail" layoutX="126.0" layoutY="199.0" mnemonicParsing="false" text="Envoyer" />
-        <Button fx:id="cancel" layoutX="217.0" layoutY="199.0" mnemonicParsing="false" text="Annuler" />
+        <Button fx:id="cancel" layoutX="217.0" layoutY="199.0" mnemonicParsing="false" onAction="#onCloseClick" text="Annuler" />
     </children>
 </AnchorPane>

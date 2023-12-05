@@ -17,7 +17,7 @@
             <menus>
                 <Menu fx:id="file" mnemonicParsing="false" text="Fichier">
                     <items>
-                        <MenuItem fx:id="saveInFile" mnemonicParsing="false" text="Enregistrer dans un fichier" />
+                        <MenuItem fx:id="saveInFile" mnemonicParsing="false" onAction="#onSaveFileClick" text="Enregistrer dans un fichier" />
                         <MenuItem fx:id="sendAMail" mnemonicParsing="false" onAction="#MailScene" text="Envoyer un mail" />
                         <MenuItem fx:id="saveInDB" mnemonicParsing="false" onAction="#SaveScene" text="Enregistrer dans la BD" />
                         <MenuItem fx:id="close" mnemonicParsing="false" onAction="#onCloseClick" text="Quitter" />

@@ -1,9 +1,9 @@
 package fr.cda.immobilier.controller;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class ModalSaveController {
     @FXML
@@ -22,6 +22,7 @@ public class ModalSaveController {
     private Button close;
 
     public void onCloseClick() {
-        Platform.exit();
+        Stage stage = (Stage) close.getScene().getWindow();
+        stage.close();
     }
 }

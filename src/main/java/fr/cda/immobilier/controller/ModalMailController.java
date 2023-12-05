@@ -1,8 +1,8 @@
 package fr.cda.immobilier.controller;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class ModalMailController {
     @FXML
@@ -11,7 +11,8 @@ public class ModalMailController {
     private Button cancel;
 
     public void onCloseClick() {
-        Platform.exit();
+        Stage stage = (Stage) cancel.getScene().getWindow();
+        stage.close();
     }
 
 }
