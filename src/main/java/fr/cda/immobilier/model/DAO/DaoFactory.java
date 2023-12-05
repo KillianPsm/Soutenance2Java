@@ -9,7 +9,7 @@ public class DaoFactory {
     private String username;
     private String password;
 
-    DaoFactory(String url, String username, String password) {
+    public DaoFactory(String url, String username, String password) {
         this.url = url;
         this.username = username;
         this.password = password;
@@ -23,7 +23,7 @@ public class DaoFactory {
         }
 
         DaoFactory instance = new DaoFactory(
-                "jdbc:mysql://localhost:3306/soutenance2", "root", "");
+                "jdbc:mysql://localhost:3306/soutenance2-tests", "root", "");
         return instance;
     }
 

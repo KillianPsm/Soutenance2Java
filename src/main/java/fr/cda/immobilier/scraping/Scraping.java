@@ -69,7 +69,7 @@ public class Scraping {
             System.out.println("Price: " + annonce.getPrix());
             System.out.println("Surface: " + annonce.getSurface());
             System.out.println("Description: " + annonce.getDescription());
-            System.out.println("Address: " + annonce.getLieuBien());
+            System.out.println("Address: " + annonce.getAdresse());
             System.out.println("Link: " + annonce.getLien());
             System.out.println("--------------------");
         }

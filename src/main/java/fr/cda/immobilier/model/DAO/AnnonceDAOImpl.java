@@ -1,8 +1,6 @@
 package fr.cda.immobilier.model.DAO;
 
 import fr.cda.immobilier.model.metier.Annonce;
-import fr.cda.immobilier.model.metier.Lieu;
-import fr.cda.immobilier.model.metier.Type;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +16,7 @@ public class AnnonceDAOImpl implements AnnonceDAO {
     private static final String DESCRIPTION = "description";
     private static final String LIEN = "lien";
     private static final String TYPE_BIEN = "typeBien";
-    private static final String LOCALISATION = "localisation";
+    private static final String ADRESSE = "adresse";
 
     public AnnonceDAOImpl(DaoFactory daoFactory) throws SQLException {
         try {
@@ -31,15 +29,14 @@ public class AnnonceDAOImpl implements AnnonceDAO {
     @Override
     public void create(Annonce annonce) {
         try {
-            Type typeBien = annonce.getTypeBien();
-            String requete = "INSERT INTO " + TABLE + " (" + TITRE + ", " + PRIX + ", " + SURFACE + ", " + DESCRIPTION + ", " + LIEN + ", " + TYPE_BIEN + ") VALUES (?, ?, ?, ?, ?, ?)";
+            String requete = "INSERT INTO " + TABLE + " (" + TITRE + ", " + PRIX + ", " + SURFACE + ", " + DESCRIPTION + ", " + LIEN + ", " + ADRESSE + ") VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement pst = conn.prepareStatement(requete);
             pst.setString(1, annonce.getTitre());
             pst.setString(2, annonce.getPrix());
             pst.setString(3, annonce.getSurface());
             pst.setString(4, annonce.getDescription());
             pst.setString(5, annonce.getLien());
-            pst.setInt(6, typeBien.getId());
+            pst.setString(6, annonce.getAdresse());  // Utiliser l'indice 6 pour le paramètre d'adresse
             pst.executeUpdate();
             pst.close();
         } catch (SQLException e) {

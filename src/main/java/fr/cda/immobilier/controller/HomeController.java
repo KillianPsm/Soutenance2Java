@@ -1,6 +1,8 @@
 package fr.cda.immobilier.controller;
 
 import fr.cda.immobilier.SoutenanceApplication;
+import fr.cda.immobilier.model.DAO.AnnonceDAO;
+import fr.cda.immobilier.model.DAO.DaoFactory;
 import fr.cda.immobilier.model.metier.Annonce;
 import fr.cda.immobilier.scraping.Scraping;
 import javafx.application.Platform;
@@ -15,10 +17,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -122,7 +124,7 @@ public class HomeController {
             price.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPrix()));
             resultSurface.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSurface()));
             description.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
-            place.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLieuBien()));
+            place.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAdresse()));
             lien.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLien()));
 
             searchResult.setItems(annonceList);
@@ -137,19 +139,18 @@ public class HomeController {
 
     public void onSaveFileClick() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Enregistrer les annonces dans un fichier texte");
 
-        // Définir par défaut l'extension du fichier en tant que ".txt"
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Fichiers texte (*.txt)", "*.txt");
-        fileChooser.getExtensionFilters().add(extFilter);
+        // Définissez le répertoire initial sur le répertoire "Documents" de l'utilisateur
+        String userHome = System.getProperty("user.home");
+        String documentsPath = userHome + "/Documents";
+        fileChooser.setInitialDirectory(new File(documentsPath));
 
-        // Définir le nom de fichier initial
-        fileChooser.setInitialFileName("annonces");
-
-        File selectedFile = fileChooser.showSaveDialog(new Stage());
+        // Affichez la boîte de dialogue
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
 
         if (selectedFile != null) {
-            saveAnnouncementsToFile(selectedFile);
+            // Faites quelque chose avec le fichier sélectionné
+            System.out.println("Fichier sélectionné : " + selectedFile.getAbsolutePath());
         }
     }
 
@@ -159,11 +160,11 @@ public class HomeController {
 
             for (Annonce annonce : annonces) {
                 writer.write("Titre: " + annonce.getTitre() + "\n");
-                writer.write("Prix: " + annonce.getPrix() + "\n");
-                writer.write("Surface: " + annonce.getSurface() + "\n");
-                writer.write("Description: " + annonce.getDescription() + "\n");
-                writer.write("Adresse: " + annonce.getLieuBien() + "\n");
-                writer.write("Lien: " + annonce.getLien() + "\n");
+                writer.write("\nPrix: " + annonce.getPrix() + "\n");
+                writer.write("\nSurface: " + annonce.getSurface() + "\n");
+                writer.write("\nDescription: " + annonce.getDescription() + "\n");
+                writer.write("\nAdresse: " + annonce.getAdresse() + "\n");
+                writer.write("\nLien: " + annonce.getLien() + "\n");
                 writer.write("--------------------\n");
             }
 
@@ -173,6 +174,25 @@ public class HomeController {
         } catch (IOException e) {
             e.printStackTrace();
             // Gérer les erreurs d'écriture du fichier ici
+        }
+    }
+
+    @FXML
+    private void onSaveDBClick() {
+        try {
+            DaoFactory daoFactory = DaoFactory.getInstance();
+            AnnonceDAO annonceDAO = daoFactory.getAnnonceDAO();
+
+            List<Annonce> annonces = searchResult.getItems();
+
+            for (Annonce annonce : annonces) {
+                annonceDAO.create(annonce);
+            }
+
+            logger.info("Annonces enregistrées dans la base de données.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Gérer les erreurs de base de données ici
         }
     }
 }

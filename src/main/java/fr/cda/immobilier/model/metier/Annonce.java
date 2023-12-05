@@ -9,7 +9,7 @@ public class Annonce {
     private String image;
     private String lien;
     private Type typeBien;
-    private String lieuBien;
+    private String adresse;
 
     public Annonce(String titre, String prix, String surface, String description, String lien) {
         this.titre = titre;
@@ -24,7 +24,7 @@ public class Annonce {
         this.prix = prix;
         this.surface = surface;
         this.description = description;
-        this.lieuBien = lieuBien;
+        this.adresse = lieuBien;
         this.lien = lien;
     }
 
@@ -92,12 +92,12 @@ public class Annonce {
         this.typeBien = typeBien;
     }
 
-    public String getLieuBien() {
-        return lieuBien;
+    public String getAdresse() {
+        return adresse;
     }
 
-    public void setLieuBien(String lieuBien) {
-        this.lieuBien = lieuBien;
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
     }
 
     @Override
