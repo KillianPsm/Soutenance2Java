@@ -5,6 +5,7 @@ module fr.cda.immobilier {
     requires org.kordamp.bootstrapfx.core;
     requires htmlunit;
     requires java.sql;
+    requires sib.api.v3.sdk;
 
     opens fr.cda.immobilier to javafx.fxml;
     exports fr.cda.immobilier;

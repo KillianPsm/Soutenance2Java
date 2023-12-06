@@ -154,7 +154,7 @@ public class HomeController {
         }
     }
 
-    private void saveAnnouncementsToFile(File file) {
+    private void saveToFile(File file) {
         try (FileWriter writer = new FileWriter(file)) {
             List<Annonce> annonces = searchResult.getItems();
 
