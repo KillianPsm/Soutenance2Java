@@ -28,6 +28,11 @@ public class HomeController {
     private static final Logger logger = Logger.getLogger(HomeController.class.getName());
 
     @FXML
+    private CheckBox chooseSeLoger;
+    @FXML
+    private CheckBox chooseOuestFrance;
+
+    @FXML
     private TableView<Annonce> searchResult;
     @FXML
     private TableColumn<Annonce, String> title;
@@ -114,15 +119,36 @@ public class HomeController {
     private void onSearchButtonClick() {
         try {
             // URL de la page web à scraper
-            String url = "https://www.seloger.com/list.htm?tri=initial&enterprise=0&idtypebien=2&idtt=2,5&naturebien=1,2,4&ci=560260&m=search_hp_new";
-
+            String url = "";
             // XPath pour extraire les informations de la page web
-            String priceXPath = ".//div[@data-test='sl.price-label']";
-            String titleXPath = ".//div[@data-test='sl.title']";
-            String surfaceXPath = ".//ul[@data-test='sl.tagsLine']";
-            String descriptionXPath = ".//div[@data-testid='sl.explore.card-description']";
-            String addressXPath = ".//div[@data-test='sl.address']";
-            String linkXPath = ".//a[@data-testid='sl.explore.coveringLink']";
+            String priceXPath = "";
+            String titleXPath = "";
+            String surfaceXPath = "";
+            String descriptionXPath = "";
+            String addressXPath = "";
+            String linkXPath = "";
+
+            // Vérifier les cases cochées et choisir le site en conséquence
+            if (chooseSeLoger.isSelected()) {
+                // URL SeLoger
+                url = "https://www.seloger.com/list.htm?tri=initial&enterprise=0&idtypebien=2&idtt=2,5&naturebien=1,2,4&ci=560260&m=search_hp_new";
+                // Ajoutez les XPath spécifiques pour SeLoger si nécessaire
+                priceXPath = ".//div[@data-test='sl.price-label']";
+                titleXPath = ".//div[@data-test='sl.title']";
+                surfaceXPath = ".//ul[@data-test='sl.tagsLine']";
+                descriptionXPath = ".//div[@data-testid='sl.explore.card-description']";
+                addressXPath = ".//div[@data-test='sl.address']";
+                linkXPath = ".//a[@data-testid='sl.explore.coveringLink']";
+            } else if (chooseOuestFrance.isSelected()) {
+                // URL Ouest France Immobilier
+                url = "https://www.ouestfrance-immo.com/acheter/maison/vannes-56-56000/";
+                priceXPath = ".//span[@class='annPrix']";
+                titleXPath = ".//span[@class='annTitre']";
+                surfaceXPath = ".//span[@class='annCriteres']/div[contains(span[@class='unit'], 'm²')]";
+                descriptionXPath = ".//span[@class='annTexte hidden-phone']";
+                addressXPath = ".//span[@class='annVille']";
+                linkXPath = "//a[@class='annLink  ']";
+            }
 
             // Création d'une instance de la classe Scraping
             Scraping scraper = new Scraping();
