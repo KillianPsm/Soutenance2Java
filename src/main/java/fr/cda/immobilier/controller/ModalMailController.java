@@ -13,7 +13,6 @@ import sibModel.*;
 
 import java.io.File;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -22,8 +21,6 @@ public class ModalMailController {
 
     @FXML
     private TextField enterEmail;
-    @FXML
-    private Button sendMail;
     @FXML
     private Button cancel;
 
@@ -54,6 +51,7 @@ public class ModalMailController {
         // Configure API key authorization: api-key
         ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("api-key");
         apiKey.setApiKey("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");
+
         File selectedFile = showFileChooser();
 
         // Vérifie si un fichier a été sélectionné
