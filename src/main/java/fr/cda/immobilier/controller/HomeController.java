@@ -6,6 +6,8 @@ import fr.cda.immobilier.model.DAO.DaoFactory;
 import fr.cda.immobilier.model.metier.Annonce;
 import fr.cda.immobilier.scraping.Scraping;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,6 +30,8 @@ public class HomeController {
     private static final Logger logger = Logger.getLogger(HomeController.class.getName());
 
     @FXML
+    private Button search;
+    @FXML
     private CheckBox chooseSeLoger;
     @FXML
     private CheckBox chooseOuestFrance;
@@ -46,6 +50,15 @@ public class HomeController {
     private TableColumn<Annonce, String> place;
     @FXML
     private TableColumn<Annonce, String> lien;
+
+    @FXML
+    private void initialize() {
+        // Créer un BooleanBinding qui est vrai si au moins une case à cocher est sélectionnée
+        BooleanBinding isAnyCheckBoxSelected = Bindings.or(chooseSeLoger.selectedProperty(), chooseOuestFrance.selectedProperty());
+
+        // Lier la disponibilité du bouton de recherche au BooleanBinding
+        search.disableProperty().bind(isAnyCheckBoxSelected.not());
+    }
 
     /**
      * Methode pour fermer la fenetre
