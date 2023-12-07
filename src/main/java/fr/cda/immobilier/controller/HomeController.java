@@ -101,26 +101,35 @@ public class HomeController {
      */
     public void SaveScene() {
         try {
-            // Création d'un chargeur FXMLLoader
             FXMLLoader loader = new FXMLLoader();
-            // Spécification de l'emplacement du fichier FXML qui définit la vue de la fenêtre modale
             loader.setLocation(SoutenanceApplication.class.getResource("modalSave.fxml"));
-            // Chargement de la vue à partir du fichier FXML, et création d'une nouvelle scène
             Scene scene = new Scene(loader.load(), 600, 500);
-            // Création d'une nouvelle fenêtre (Stage)
             Stage stage = new Stage();
-            // Définition du titre de la fenêtre modale
             stage.setTitle("Sauvegarder les annonces dans une base de données");
-            // Définition de la scène pour la fenêtre modale
             stage.setScene(scene);
-            // Définition du type de modality de la fenêtre (fenêtre modale bloquant les interactions avec les autres fenêtres)
             stage.initModality(Modality.APPLICATION_MODAL);
-            // Affichage de la fenêtre modale et attente de sa fermeture (showAndWait bloque l'exécution jusqu'à ce que la fenêtre soit fermée)
             stage.showAndWait();
-            // Affichage de la fenêtre (peut être redondant ici)
             stage.show();
         } catch (Exception e) {
-            // Gestion des exceptions : Affichage de la trace de la pile en cas d'erreur
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Methode qui ouvre une fenetre modale avec le mode d'emploi
+     */
+    public void HelpScene() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(SoutenanceApplication.class.getResource("modalHelp.fxml"));
+            Scene scene = new Scene(loader.load(), 800, 600);
+            Stage stage = new Stage();
+            stage.setTitle("Mode d'emploi de l'application");
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+            stage.show();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

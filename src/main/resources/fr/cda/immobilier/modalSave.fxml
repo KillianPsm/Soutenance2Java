@@ -4,30 +4,41 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="fr.cda.immobilier.controller.ModalBDController">
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.cda.immobilier.controller.ModalBDController">
     <children>
-        <Text layoutX="14.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0"
-              text="Paramètres de la base de données"/>
-        <Label layoutX="120.0" layoutY="134.0" text="Nom du serveur :"/>
-        <TextField fx:id="hostName" layoutX="300.0" layoutY="146.0" promptText="Nom d'host ou adresse IP"
-                   AnchorPane.topAnchor="130.0"/>
-        <Label layoutX="120.0" layoutY="194.0" text="Nom de la base de données :"/>
-        <TextField fx:id="dbName" layoutX="300.0" layoutY="207.0" promptText="Nom de la BDD"
-                   AnchorPane.topAnchor="190.0"/>
-        <Label layoutX="119.0" layoutY="254.0" text="Numéro de port de la BDD :"/>
-        <TextField fx:id="port" layoutX="300.0" layoutY="272.0" promptText="ex : 3306" AnchorPane.topAnchor="250.0"/>
-        <Label layoutX="120.0" layoutY="314.0" text="Login utilisateur :"/>
-        <TextField fx:id="login" layoutX="300.0" layoutY="329.0" promptText="Nom du login utilisateur"
-                   AnchorPane.topAnchor="310.0"/>
-        <Label layoutX="120.0" layoutY="374.0" text="Mot de passe utilisateur :"/>
-        <TextField fx:id="password" layoutX="300.0" layoutY="369.0" promptText="Mdp utilisateur"
-                   AnchorPane.topAnchor="370.0"/>
-        <Button fx:id="validate" layoutX="211.0" layoutY="433.0" mnemonicParsing="false" text="Valider"
-                AnchorPane.leftAnchor="210.0"/>
-        <Button fx:id="close" layoutX="323.0" layoutY="433.0" mnemonicParsing="false" onAction="#onCloseClick"
-                text="Fermer" AnchorPane.rightAnchor="210.0"/>
+        <Text layoutX="14.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Paramètres de la base de données">
+         <font>
+            <Font name="Caviar Dreams Bold" size="12.0" />
+         </font></Text>
+        <Label layoutX="120.0" layoutY="134.0" text="Nom du serveur :">
+         <font>
+            <Font name="Caviar Dreams" size="12.0" />
+         </font></Label>
+        <TextField fx:id="hostName" layoutX="300.0" layoutY="146.0" promptText="Nom d'host ou adresse IP" AnchorPane.topAnchor="130.0" />
+        <Label layoutX="120.0" layoutY="194.0" text="Nom de la base de données :">
+         <font>
+            <Font name="Caviar Dreams" size="12.0" />
+         </font></Label>
+        <TextField fx:id="dbName" layoutX="300.0" layoutY="207.0" promptText="Nom de la BDD" AnchorPane.topAnchor="190.0" />
+        <Label layoutX="119.0" layoutY="254.0" text="Numéro de port de la BDD :">
+         <font>
+            <Font name="Caviar Dreams" size="12.0" />
+         </font></Label>
+        <TextField fx:id="port" layoutX="300.0" layoutY="272.0" promptText="ex : 3306" AnchorPane.topAnchor="250.0" />
+        <Label layoutX="120.0" layoutY="314.0" text="Login utilisateur :">
+         <font>
+            <Font name="Caviar Dreams" size="12.0" />
+         </font></Label>
+        <TextField fx:id="login" layoutX="300.0" layoutY="329.0" promptText="Nom du login utilisateur" AnchorPane.topAnchor="310.0" />
+        <Label layoutX="120.0" layoutY="374.0" text="Mot de passe utilisateur :">
+         <font>
+            <Font name="Caviar Dreams" size="12.0" />
+         </font></Label>
+        <TextField fx:id="password" layoutX="300.0" layoutY="369.0" promptText="Mdp utilisateur" AnchorPane.topAnchor="370.0" />
+        <Button fx:id="validate" layoutX="211.0" layoutY="433.0" mnemonicParsing="false" text="Valider" AnchorPane.leftAnchor="210.0" />
+        <Button fx:id="close" layoutX="323.0" layoutY="433.0" mnemonicParsing="false" onAction="#onCloseClick" text="Fermer" AnchorPane.rightAnchor="210.0" />
     </children>
 </AnchorPane>
