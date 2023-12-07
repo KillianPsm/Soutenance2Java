@@ -7,10 +7,4 @@ public interface AnnonceDAO {
      * @param annonce
      */
     void create(Annonce annonce);
-
-    /**
-     * @param id
-     * @return
-     */
-    Annonce read(long id);
 }

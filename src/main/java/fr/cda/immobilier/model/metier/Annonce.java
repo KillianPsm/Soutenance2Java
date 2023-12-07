@@ -8,17 +8,17 @@ public class Annonce {
     private String description;
     private String image;
     private String lien;
-    private Type typeBien;
     private String adresse;
 
-    public Annonce(String titre, String prix, String surface, String description, String lien) {
-        this.titre = titre;
-        this.prix = prix;
-        this.surface = surface;
-        this.description = description;
-        this.lien = lien;
-    }
-
+    /**
+     * Constructeur d'annonces
+     * @param titre
+     * @param prix
+     * @param surface
+     * @param description
+     * @param lieuBien
+     * @param lien
+     */
     public Annonce(String titre, String prix, String surface, String description, String lieuBien, String lien) {
         this.titre = titre;
         this.prix = prix;
@@ -82,14 +82,6 @@ public class Annonce {
 
     public void setLien(String lien) {
         this.lien = lien;
-    }
-
-    public Type getTypeBien() {
-        return typeBien;
-    }
-
-    public void setTypeBien(Type typeBien) {
-        this.typeBien = typeBien;
     }
 
     public String getAdresse() {

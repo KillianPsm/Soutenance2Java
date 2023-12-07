@@ -5,22 +5,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class ModalSaveController {
-    @FXML
-    private TextField hostName;
-    @FXML
-    private TextField dbName;
-    @FXML
-    private TextField port;
-    @FXML
-    private TextField login;
-    @FXML
-    private TextField password;
-    @FXML
-    private Button validate;
+public class ModalBDController {
     @FXML
     private Button close;
 
+    /**
+     * Methode pour fermer la modale en cliquant sur un bouton
+     */
     public void onCloseClick() {
         Stage stage = (Stage) close.getScene().getWindow();
         stage.close();

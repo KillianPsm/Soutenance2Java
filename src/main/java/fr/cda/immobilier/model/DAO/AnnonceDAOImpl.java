@@ -6,6 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * Classe d'implementation des méthodes du dao
+ */
 public class AnnonceDAOImpl implements AnnonceDAO {
     protected Connection conn;
     private static final String TABLE = "annonce";
@@ -18,6 +21,11 @@ public class AnnonceDAOImpl implements AnnonceDAO {
     private static final String TYPE_BIEN = "typeBien";
     private static final String ADRESSE = "adresse";
 
+    /**
+     * Appel de connexion a la base de donnees
+     * @param daoFactory
+     * @throws SQLException
+     */
     public AnnonceDAOImpl(DaoFactory daoFactory) throws SQLException {
         try {
             this.conn = daoFactory.getConnection();
@@ -26,6 +34,10 @@ public class AnnonceDAOImpl implements AnnonceDAO {
         }
     }
 
+    /**
+     * Methode de creation d'annonces dans la base de donnees
+     * @param annonce
+     */
     @Override
     public void create(Annonce annonce) {
         try {
@@ -36,16 +48,11 @@ public class AnnonceDAOImpl implements AnnonceDAO {
             pst.setString(3, annonce.getSurface());
             pst.setString(4, annonce.getDescription());
             pst.setString(5, annonce.getLien());
-            pst.setString(6, annonce.getAdresse());  // Utiliser l'indice 6 pour le paramètre d'adresse
+            pst.setString(6, annonce.getAdresse());
             pst.executeUpdate();
             pst.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @Override
-    public Annonce read(long id) {
-        return null;
     }
 }

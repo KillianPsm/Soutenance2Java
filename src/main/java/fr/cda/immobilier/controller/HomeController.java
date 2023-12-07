@@ -26,31 +26,6 @@ import java.util.logging.Logger;
 
 public class HomeController {
     private static final Logger logger = Logger.getLogger(HomeController.class.getName());
-    @FXML
-    private MenuItem saveInFile;
-    @FXML
-    private MenuItem sendMail;
-    @FXML
-    private MenuItem saveDB;
-    @FXML
-    private MenuItem close;
-
-    @FXML
-    private MenuItem dbSettings;
-
-    @FXML
-    private MenuItem userGuide;
-
-    @FXML
-    private ChoiceBox chooseType;
-    @FXML
-    private TextField minPrice;
-    @FXML
-    private TextField maxPrice;
-    @FXML
-    private TextField searchSurface;
-    @FXML
-    private TextField chooseLoc;
 
     @FXML
     private TableView<Annonce> searchResult;
@@ -67,10 +42,16 @@ public class HomeController {
     @FXML
     private TableColumn<Annonce, String> lien;
 
+    /**
+     * Methode pour fermer la fenetre
+     */
     public void onCloseClick() {
         Platform.exit();
     }
 
+    /**
+     * Methode qui ouvre une fenetre modale pour envoyer un mail
+     */
     public void MailScene() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -87,6 +68,9 @@ public class HomeController {
         }
     }
 
+    /**
+     * Methode qui ouvre une fenetre modale pour modifier les parametres de la base de donnees
+     */
     public void SaveScene() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -103,6 +87,9 @@ public class HomeController {
         }
     }
 
+    /**
+     * Methode pour effectuer une recherche d'annonces
+     */
     @FXML
     private void onSearchButtonClick() {
         try {
@@ -137,6 +124,10 @@ public class HomeController {
 
     }
 
+    /**
+     * Methode pour sauvgarder les annonces trouvees dans un fichier en selectionnant l'emplacement
+     */
+    @FXML
     public void onSaveFileClick() {
         FileChooser fileChooser = new FileChooser();
 
@@ -154,6 +145,10 @@ public class HomeController {
         }
     }
 
+    /**
+     * Methode qui fait la mise en forme de la sauvegarde dans un fichier
+     * @param file
+     */
     private void saveToFile(File file) {
         try (FileWriter writer = new FileWriter(file)) {
             List<Annonce> annonces = searchResult.getItems();
@@ -177,6 +172,9 @@ public class HomeController {
         }
     }
 
+    /**
+     * Methode pour sauvegader les annonces dans la base de donnees
+     */
     @FXML
     private void onSaveDBClick() {
         try {
