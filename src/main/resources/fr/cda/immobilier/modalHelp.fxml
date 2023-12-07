@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.cda.immobilier.controller.ModalHelpController">
    <children>
-      <Button fx:id="close" layoutX="373.0" layoutY="552.0" mnemonicParsing="false" text="Fermer" />
+      <Button fx:id="close" layoutX="373.0" layoutY="552.0" mnemonicParsing="false" onAction="#onCloseClick" text="Fermer" />
       <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue sur le mode d'emploi de cette application.">
          <font>
             <Font name="Caviar Dreams Bold" size="14.0" />
