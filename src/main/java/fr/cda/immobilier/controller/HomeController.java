@@ -201,9 +201,6 @@ public class HomeController {
         }
     }
 
-    /**
-     * Methode pour sauvgarder les annonces trouvees dans un fichier en selectionnant l'emplacement
-     */
     @FXML
     public void onSaveFileClick() {
         // Création d'une instance de FileChooser
@@ -215,11 +212,14 @@ public class HomeController {
         fileChooser.setInitialDirectory(new File(documentsPath));
 
         // Affichez la boîte de dialogue pour choisir un fichier à sauvegarder
-        File selectedFile = fileChooser.showOpenDialog(new Stage());
+        File selectedFile = fileChooser.showSaveDialog(new Stage());
 
         if (selectedFile != null) {
             // Faites quelque chose avec le fichier sélectionné (dans cet exemple, imprimez simplement le chemin absolu du fichier)
             System.out.println("Fichier sélectionné : " + selectedFile.getAbsolutePath());
+
+            // Appel à la méthode pour sauvegarder les annonces dans le fichier sélectionné
+            saveToFile(selectedFile);
         }
     }
 
