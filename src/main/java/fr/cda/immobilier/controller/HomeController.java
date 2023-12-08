@@ -30,6 +30,10 @@ public class HomeController {
     private static final Logger logger = Logger.getLogger(HomeController.class.getName());
 
     @FXML
+    private ComboBox<String> typeComboBox;
+    @FXML
+    private ComboBox<String> villeComboBox;
+    @FXML
     private Button search;
     @FXML
     private CheckBox chooseSeLoger;
@@ -150,25 +154,24 @@ public class HomeController {
             String addressXPath = "";
             String linkXPath = "";
 
+            String selectedVille = villeComboBox.getSelectionModel().getSelectedItem();
+            String codeVille = choisirVille(selectedVille);
+
+            String selectedType = typeComboBox.getSelectionModel().getSelectedItem();
+            String idType = choisirType(selectedType);
             // Vérifier les cases cochées et choisir le site en conséquence
             if (chooseSeLoger.isSelected()) {
                 // URL SeLoger
-                url = "https://www.seloger.com/list.htm?tri=initial&enterprise=0&idtypebien=2&idtt=2,5&naturebien=1,2,4&ci=560260&m=search_hp_new";
+                url = "https://www.seloger.com/list.htm?tri=initial&enterprise=0&idtypebien=&idtt=" + idType + "2,5&naturebien=1,2,4&ci=" + codeVille + "&m=search_hp_new";
+//              url = "https://www.seloger.com/list.htm?tri=initial&enterprise=0&idtypebien=1&idtt=2,5&naturebien=1,2,4&ci=560260&m=search_hp_new";
+//              url = "https://www.seloger.com/list.htm?tri=initial&enterprise=0&idtypebien=2&idtt=2,5&naturebien=1,2,4&ci=560260&m=search_hp_new";
+
                 priceXPath = ".//div[@data-test='sl.price-label']";
                 titleXPath = ".//div[@data-test='sl.title']";
                 surfaceXPath = ".//ul[@data-test='sl.tagsLine']";
                 descriptionXPath = ".//div[@data-testid='sl.explore.card-description']";
                 addressXPath = ".//div[@data-test='sl.address']";
                 linkXPath = ".//a[@data-testid='sl.explore.coveringLink']";
-            } else if (chooseOuestFrance.isSelected()) {
-                // URL Ouest France Immobilier
-                url = "https://www.ouestfrance-immo.com/acheter/maison/vannes-56-56000/";
-                priceXPath = ".//span[@data-v-09720c1a]";
-                titleXPath = ".//p[@data-v-ce3ef9f4]";
-                surfaceXPath = ".//div[@data-v-55051496=''][contains(text(), '0') or contains(text(), '1') or contains(text(), '2') or contains(text(), '3') or contains(text(), '4') or contains(text(), '5') or contains(text(), '6') or contains(text(), '7') or contains(text(), '8') or contains(text(), '9')]";
-                descriptionXPath = ".//div[@class=\"card-annonce__content__description line-clamp\"]/descendant::p";
-                addressXPath = ".//p[@data-v-ce3ef9f4][2]";
-                linkXPath = ".//a[@data-v-ce3ef9f4]";
             }
 
             // Création d'une instance de la classe Scraping
@@ -282,5 +285,73 @@ public class HomeController {
             // Gestion des exceptions SQL : Affichage de la trace de la pile en cas d'erreur
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Méthode pour choisir le code de la ville en fonction de la sélection dans la ComboBox
+     */
+    private String choisirVille(String choixVille) {
+        if (choixVille != null && chooseSeLoger.isSelected()) {
+            switch (choixVille) {
+                case "vannes":
+                    return "560260";
+                case "lorient":
+                    return "560121";
+                case "brest":
+                    return "290019";
+                case "quimper":
+                    return "290232";
+                case "guingamp":
+                    return "220070";
+                case "saint-brieuc":
+                    return "220278";
+            }
+        } else {
+            return null;
+        }
+        return choixVille;
+    }
+
+    /**
+     *
+     */
+    @FXML
+    private void onVilleComboBoxSelected() {
+        String selectedVille = villeComboBox.getSelectionModel().getSelectedItem();
+        String codeVille = choisirVille(selectedVille);
+        // Utilisez le code de la ville comme nécessaire
+        System.out.println("Code de la ville sélectionnée : " + codeVille);
+    }
+
+    /**
+     * Méthode pour choisir le code de le type en fonction de la sélection dans la ComboBox
+     */
+    private String choisirType(String choixType) {
+        if (choixType != null && chooseSeLoger.isSelected()) {
+            switch (choixType) {
+                case "appartement":
+                    return "1";
+                case "maison":
+                    return "2";
+                case "parking/box":
+                    return "3";
+                case "terrain":
+                    return "4";
+            }
+        } else {
+            return null;
+        }
+        return choixType;
+    }
+
+    /**
+     *
+     */
+    @FXML
+    private void onTypeComboBoxSelected() {
+        String selectedType = typeComboBox.getSelectionModel().getSelectedItem();
+        String idType = choisirType(selectedType);
+        // Utilisez le code de la ville comme nécessaire
+        System.out.println("Type sélectionné : " + idType);
     }
 }
