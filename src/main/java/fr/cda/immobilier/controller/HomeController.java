@@ -51,14 +51,14 @@ public class HomeController {
     @FXML
     private TableColumn<Annonce, String> lien;
 
-    @FXML
-    private void initialize() {
-        // Créer un BooleanBinding qui est vrai si au moins une case à cocher est sélectionnée
-        BooleanBinding isAnyCheckBoxSelected = Bindings.or(chooseSeLoger.selectedProperty(), chooseOuestFrance.selectedProperty());
-
-        // Lier la disponibilité du bouton de recherche au BooleanBinding
-        search.disableProperty().bind(isAnyCheckBoxSelected.not());
-    }
+//    @FXML
+//    private void initialize() {
+//        // Créer un BooleanBinding qui est vrai si au moins une case à cocher est sélectionnée
+//        BooleanBinding isAnyCheckBoxSelected = Bindings.or(chooseSeLoger.selectedProperty(), chooseOuestFrance.selectedProperty());
+//
+//        // Lier la disponibilité du bouton de recherche au BooleanBinding
+//        search.disableProperty().bind(isAnyCheckBoxSelected.not());
+//    }
 
     /**
      * Methode pour fermer la fenetre
@@ -154,7 +154,6 @@ public class HomeController {
             if (chooseSeLoger.isSelected()) {
                 // URL SeLoger
                 url = "https://www.seloger.com/list.htm?tri=initial&enterprise=0&idtypebien=2&idtt=2,5&naturebien=1,2,4&ci=560260&m=search_hp_new";
-                // Ajoutez les XPath spécifiques pour SeLoger si nécessaire
                 priceXPath = ".//div[@data-test='sl.price-label']";
                 titleXPath = ".//div[@data-test='sl.title']";
                 surfaceXPath = ".//ul[@data-test='sl.tagsLine']";
@@ -169,7 +168,7 @@ public class HomeController {
                 surfaceXPath = ".//span[@class='annCriteres']/div[contains(span[@class='unit'], 'm²')]";
                 descriptionXPath = ".//span[@class='annTexte hidden-phone']";
                 addressXPath = ".//span[@class='annVille']";
-                linkXPath = "//a[@class='annLink  ']";
+                linkXPath = ".//a[@class='annLink  ']";
             }
 
             // Création d'une instance de la classe Scraping

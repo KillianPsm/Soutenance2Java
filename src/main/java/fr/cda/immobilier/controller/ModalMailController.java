@@ -39,7 +39,6 @@ public class ModalMailController {
         // Définissez les filtres de fichier si nécessaire
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Fichiers texte", "*.txt"),
-                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.gif"),
                 new FileChooser.ExtensionFilter("Tous les fichiers", "*.*"));
 
         // Affiche la boîte de dialogue et attend la sélection de fichier
