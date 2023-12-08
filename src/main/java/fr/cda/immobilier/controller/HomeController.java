@@ -34,6 +34,12 @@ public class HomeController {
     @FXML
     private ComboBox<String> villeComboBox;
     @FXML
+    private TextField minPrice;
+    @FXML
+    private TextField maxPrice;
+    @FXML
+    private TextField searchSurface;
+    @FXML
     private Button search;
     @FXML
     private CheckBox chooseSeLoger;
@@ -162,9 +168,10 @@ public class HomeController {
             // Vérifier les cases cochées et choisir le site en conséquence
             if (chooseSeLoger.isSelected()) {
                 // URL SeLoger
-                url = "https://www.seloger.com/list.htm?tri=initial&enterprise=0&idtypebien=&idtt=" + idType + "2,5&naturebien=1,2,4&ci=" + codeVille + "&m=search_hp_new";
+                url = "https://www.seloger.com/list.htm?tri=initial&enterprise=0&idtypebien=" + idType + "&idtt=2,5&naturebien=1,2,4&ci=" + codeVille + "&m=search_hp_new";
 //              url = "https://www.seloger.com/list.htm?tri=initial&enterprise=0&idtypebien=1&idtt=2,5&naturebien=1,2,4&ci=560260&m=search_hp_new";
 //              url = "https://www.seloger.com/list.htm?tri=initial&enterprise=0&idtypebien=2&idtt=2,5&naturebien=1,2,4&ci=560260&m=search_hp_new";
+//              url = "https://www.seloger.com/list.htm?tri=initial&enterprise=0&idtypebien=2&pxMax=1000000&idtt=2,5&naturebien=1,2,4&ci=560260&m=search_hp_new";
 
                 priceXPath = ".//div[@data-test='sl.price-label']";
                 titleXPath = ".//div[@data-test='sl.title']";
@@ -172,7 +179,23 @@ public class HomeController {
                 descriptionXPath = ".//div[@data-testid='sl.explore.card-description']";
                 addressXPath = ".//div[@data-test='sl.address']";
                 linkXPath = ".//a[@data-testid='sl.explore.coveringLink']";
+            } else if (chooseOuestFrance.isSelected()) {
+                // URL Ouest France Immobilier
+                url = "https://www.ouestfrance-immo.com/acheter/maison/vannes-56-56000/";
+                priceXPath = ".//span[@data-v-09720c1a]";
+                titleXPath = ".//p[contains(@data-v-ce3ef9f4, '')]";
+                surfaceXPath = ".//div[@class='detail-highlightsitem badge badge--square' and contains(text(), '㎡')]]";
+                descriptionXPath = ".//div[@class=\"card-annonce__content__description line-clamp\"]/descendant::p";
+                addressXPath = ".//p[@data-v-ce3ef9f4][2]";
+                linkXPath = ".//a[@data-v-ce3ef9f4]";
             }
+
+//                    ".//div[@class='card-annoncecontent']",
+//                    ".//p[contains(@data-v-ce3ef9f4, '')]",
+//                    ".//div[@class='detail-highlightsitem badge badge--square' and contains(text(), '㎡')]",
+//                    "//p[contains(@data-v-ce3ef9f4, '')][3]",
+//                    ".//span[contains(@class, 'detail-prix')]",
+//                    ".//a[@data-v-ce3ef9f4]"
 
             // Création d'une instance de la classe Scraping
             Scraping scraper = new Scraping();
@@ -197,6 +220,7 @@ public class HomeController {
 
             // Log d'information indiquant que les données ont été mises à jour dans la TableView
             logger.info("Données mises à jour dans la TableView.");
+            System.out.println(url);
         } catch (IOException e) {
             // Gestion des erreurs : Affichage de la trace de la pile en cas d'erreur
             e.printStackTrace();
@@ -287,9 +311,6 @@ public class HomeController {
         }
     }
 
-    /**
-     * Méthode pour choisir le code de la ville en fonction de la sélection dans la ComboBox
-     */
     private String choisirVille(String choixVille) {
         if (choixVille != null && chooseSeLoger.isSelected()) {
             switch (choixVille) {
@@ -312,9 +333,6 @@ public class HomeController {
         return choixVille;
     }
 
-    /**
-     *
-     */
     @FXML
     private void onVilleComboBoxSelected() {
         String selectedVille = villeComboBox.getSelectionModel().getSelectedItem();
@@ -344,9 +362,6 @@ public class HomeController {
         return choixType;
     }
 
-    /**
-     *
-     */
     @FXML
     private void onTypeComboBoxSelected() {
         String selectedType = typeComboBox.getSelectionModel().getSelectedItem();
