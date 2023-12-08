@@ -34,6 +34,7 @@ public class Scraping {
 
     /**
      * Methode de scraping
+     *
      * @param url
      * @param priceXPath
      * @param titleXPath
@@ -65,9 +66,27 @@ public class Scraping {
 
         // Parcours des listes extraites et création des objets Annonce
         for (int i = 0; i < maxSize; i++) {
-            String title = i < titles.size() ? titles.get(i).getTextContent() : "";
-            String price = i < prices.size() ? prices.get(i).getTextContent() : "";
-            String surface = i < surfaces.size() ? surfaces.get(i).getTextContent() : "";
+            // On vérifie la taille des différentes parties des annonces pour mettre une valeur par defaut si vide
+            String title;
+            if (i < titles.size()) {
+                title = titles.get(i).getTextContent();
+            } else {
+                title = "Titre non disponible";
+            }
+
+            String price;
+            if (i < prices.size()) {
+                price = prices.get(i).getTextContent();
+            } else {
+                price = "Prix non disponible";
+            }
+
+            String surface;
+            if (i < surfaces.size()) {
+                surface = surfaces.get(i).getTextContent();
+            } else {
+                surface = "Surface non disponible";
+            }
 
             String description;
             if (i < descriptions.size()) {
@@ -76,7 +95,12 @@ public class Scraping {
                 description = "Description non disponible";
             }
 
-            String address = i < addresses.size() ? addresses.get(i).getTextContent() : "";
+            String address;
+            if (i < addresses.size()) {
+                address = addresses.get(i).getTextContent();
+            } else {
+                address = "Adresse non disponible";
+            }
 
             // Utilisation de getAttribute("href") pour récupérer l'URL du lien
             String link = i < links.size() ? links.get(i).getAttribute("href") : "";
@@ -91,6 +115,7 @@ public class Scraping {
 
     /**
      * Methode pour l'ecriture des annonces dans un fichier
+     *
      * @param url
      * @param priceXPath
      * @param titleXPath

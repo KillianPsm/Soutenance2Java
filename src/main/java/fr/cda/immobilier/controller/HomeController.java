@@ -51,14 +51,14 @@ public class HomeController {
     @FXML
     private TableColumn<Annonce, String> lien;
 
-//    @FXML
-//    private void initialize() {
-//        // Créer un BooleanBinding qui est vrai si au moins une case à cocher est sélectionnée
-//        BooleanBinding isAnyCheckBoxSelected = Bindings.or(chooseSeLoger.selectedProperty(), chooseOuestFrance.selectedProperty());
-//
-//        // Lier la disponibilité du bouton de recherche au BooleanBinding
-//        search.disableProperty().bind(isAnyCheckBoxSelected.not());
-//    }
+    @FXML
+    private void initialize() {
+        // Créer un BooleanBinding qui est vrai si au moins une case à cocher est sélectionnée
+        BooleanBinding isAnyCheckBoxSelected = Bindings.or(chooseSeLoger.selectedProperty(), chooseOuestFrance.selectedProperty());
+
+        // Lier la disponibilité du bouton de recherche au BooleanBinding
+        search.disableProperty().bind(isAnyCheckBoxSelected.not());
+    }
 
     /**
      * Methode pour fermer la fenetre
@@ -163,12 +163,12 @@ public class HomeController {
             } else if (chooseOuestFrance.isSelected()) {
                 // URL Ouest France Immobilier
                 url = "https://www.ouestfrance-immo.com/acheter/maison/vannes-56-56000/";
-                priceXPath = ".//span[@class='annPrix']";
-                titleXPath = ".//span[@class='annTitre']";
-                surfaceXPath = ".//span[@class='annCriteres']/div[contains(span[@class='unit'], 'm²')]";
-                descriptionXPath = ".//span[@class='annTexte hidden-phone']";
-                addressXPath = ".//span[@class='annVille']";
-                linkXPath = ".//a[@class='annLink  ']";
+                priceXPath = ".//span[@data-v-09720c1a]";
+                titleXPath = ".//p[@data-v-ce3ef9f4]";
+                surfaceXPath = ".//div[@data-v-55051496=''][contains(text(), '0') or contains(text(), '1') or contains(text(), '2') or contains(text(), '3') or contains(text(), '4') or contains(text(), '5') or contains(text(), '6') or contains(text(), '7') or contains(text(), '8') or contains(text(), '9')]";
+                descriptionXPath = ".//div[@class=\"card-annonce__content__description line-clamp\"]/descendant::p";
+                addressXPath = ".//p[@data-v-ce3ef9f4][2]";
+                linkXPath = ".//a[@data-v-ce3ef9f4]";
             }
 
             // Création d'une instance de la classe Scraping
