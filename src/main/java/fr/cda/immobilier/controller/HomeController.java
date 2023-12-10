@@ -112,7 +112,7 @@ public class HomeController {
     public void SaveScene() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(SoutenanceApplication.class.getResource("modalSave.fxml"));
+            loader.setLocation(SoutenanceApplication.class.getResource("modalBDParam.fxml"));
             Scene scene = new Scene(loader.load(), 600, 500);
             Stage stage = new Stage();
             stage.setTitle("Sauvegarder les annonces dans une base de données");
@@ -165,17 +165,39 @@ public class HomeController {
 
             String selectedType = typeComboBox.getSelectionModel().getSelectedItem();
             String idType = choisirType(selectedType);
+
+            String pMin = minPrice.getText();
+
+            String pMax = maxPrice.getText();
+
+            String pParam = "";
+            // Vérifiez si le champ maxPrice est vide ou non
+            if (!pMin.isEmpty() && !pMax.isEmpty()) {
+                // Si le champ maxPrice n'est pas vide, construisez la partie correspondante de l'URL
+                pParam = "&price=" + pMin + "/" + pMax;
+            } else if (!pMin.isEmpty()) {
+                pParam = "&price=" + pMin + "/NaN";
+            } else if (!pMax.isEmpty()) {
+                // Si le champ maxPrice n'est pas vide, construisez la partie correspondante de l'URL
+                pParam = "&price=" + "NaN/" + pMax;
+            }
+
+            String surface = searchSurface.getText();
+            String surfaceParam = "";
+            // Vérifiez si le champ maxPrice est vide ou non
+            if (!surface.isEmpty()) {
+                // Si le champ maxPrice n'est pas vide, construisez la partie correspondante de l'URL
+                surfaceParam = "&surface=" + "NaN/" + surface;
+            }
+
             // Vérifier les cases cochées et choisir le site en conséquence
             if (chooseSeLoger.isSelected()) {
                 // URL SeLoger
-                url = "https://www.seloger.com/list.htm?tri=initial&enterprise=0&idtypebien=" + idType + "&idtt=2,5&naturebien=1,2,4&ci=" + codeVille + "&m=search_hp_new";
-//              url = "https://www.seloger.com/list.htm?tri=initial&enterprise=0&idtypebien=1&idtt=2,5&naturebien=1,2,4&ci=560260&m=search_hp_new";
-//              url = "https://www.seloger.com/list.htm?tri=initial&enterprise=0&idtypebien=2&idtt=2,5&naturebien=1,2,4&ci=560260&m=search_hp_new";
-//              url = "https://www.seloger.com/list.htm?tri=initial&enterprise=0&idtypebien=2&pxMax=1000000&idtt=2,5&naturebien=1,2,4&ci=560260&m=search_hp_new";
+                url = "https://www.seloger.com/list.htm?projects=2,5&types=" + idType + "&natures=1,2,4&places=[{\"inseeCodes\":[" + codeVille + "]}]" + pParam + surfaceParam + "&mandatorycommodities=0&enterprise=0&qsVersion=1.0&m=search_refine-redirection-search_results";
 
                 priceXPath = ".//div[@data-test='sl.price-label']";
                 titleXPath = ".//div[@data-test='sl.title']";
-                surfaceXPath = ".//ul[@data-test='sl.tagsLine']";
+                surfaceXPath = ".//ul[@data-test='sl.tagsLine']/li[3]";
                 descriptionXPath = ".//div[@data-testid='sl.explore.card-description']";
                 addressXPath = ".//div[@data-test='sl.address']";
                 linkXPath = ".//a[@data-testid='sl.explore.coveringLink']";
