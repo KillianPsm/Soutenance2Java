@@ -171,27 +171,30 @@ public class HomeController {
             String pMax = maxPrice.getText();
 
             String pParam = "";
-            // Vérifiez si le champ maxPrice est vide ou non
-            if (!pMin.isEmpty() && !pMax.isEmpty()) {
-                // Si le champ maxPrice n'est pas vide, construisez la partie correspondante de l'URL
-                pParam = "&price=" + pMin + "/" + pMax;
-            } else if (!pMin.isEmpty()) {
-                pParam = "&price=" + pMin + "/NaN";
-            } else if (!pMax.isEmpty()) {
-                // Si le champ maxPrice n'est pas vide, construisez la partie correspondante de l'URL
-                pParam = "&price=" + "NaN/" + pMax;
-            }
 
             String surface = searchSurface.getText();
             String surfaceParam = "";
-            // Vérifiez si le champ maxPrice est vide ou non
-            if (!surface.isEmpty()) {
-                // Si le champ maxPrice n'est pas vide, construisez la partie correspondante de l'URL
-                surfaceParam = "&surface=" + "NaN/" + surface;
-            }
+
 
             // Vérifier les cases cochées et choisir le site en conséquence
             if (chooseSeLoger.isSelected()) {
+                // Vérifiez si le champ maxPrice est vide ou non
+                if (!pMin.isEmpty() && !pMax.isEmpty()) {
+                    // Si le champ maxPrice n'est pas vide, construisez la partie correspondante de l'URL
+                    pParam = "&price=" + pMin + "/" + pMax;
+                } else if (!pMin.isEmpty()) {
+                    pParam = "&price=" + pMin + "/NaN";
+                } else if (!pMax.isEmpty()) {
+                    // Si le champ maxPrice n'est pas vide, construisez la partie correspondante de l'URL
+                    pParam = "&price=NaN/" + pMax;
+                }
+
+                // Vérifiez si le champ surface est vide ou non
+                if (!surface.isEmpty()) {
+                    // Si le champ maxPrice n'est pas vide, construisez la partie correspondante de l'URL
+                    surfaceParam = "&surface=NaN/" + surface;
+                }
+
                 // URL SeLoger
                 url = "https://www.seloger.com/list.htm?projects=2,5&types=" + idType + "&natures=1,2,4&places=[{\"inseeCodes\":[" + codeVille + "]}]" + pParam + surfaceParam + "&mandatorycommodities=0&enterprise=0&qsVersion=1.0&m=search_refine-redirection-search_results";
 
@@ -201,23 +204,33 @@ public class HomeController {
                 descriptionXPath = ".//div[@data-testid='sl.explore.card-description']";
                 addressXPath = ".//div[@data-test='sl.address']";
                 linkXPath = ".//a[@data-testid='sl.explore.coveringLink']";
+
             } else if (chooseOuestFrance.isSelected()) {
+                // Vérifiez si le champ maxPrice est vide ou non
+                if (!pMin.isEmpty() && !pMax.isEmpty()) {
+                    // Si le champ maxPrice n'est pas vide, construisez la partie correspondante de l'URL
+                    pParam = "?prix=" + pMin + "_" + pMax;
+                } else if (!pMin.isEmpty()) {
+                    pParam = "?prix=" + pMin + "_0";
+                } else if (!pMax.isEmpty()) {
+                    // Si le champ maxPrice n'est pas vide, construisez la partie correspondante de l'URL
+                    pParam = "?prix=0_" + pMax;
+                }
+
+                // Vérifiez si le champ surface est vide ou non
+                if (!surface.isEmpty()) {
+                    // Si le champ maxPrice n'est pas vide, construisez la partie correspondante de l'URL
+                    surfaceParam = "&surface=0_ " + surface;
+                }
                 // URL Ouest France Immobilier
-                url = "https://www.ouestfrance-immo.com/acheter/maison/vannes-56-56000/";
+                url = "https://www.ouestfrance-immo.com/acheter/" + idType + "/" + codeVille + "/" + pParam + surfaceParam;
                 priceXPath = ".//span[@data-v-09720c1a]";
                 titleXPath = ".//p[contains(@data-v-ce3ef9f4, '')]";
-                surfaceXPath = ".//div[@class='detail-highlightsitem badge badge--square' and contains(text(), '㎡')]]";
+                surfaceXPath = ".//div[@class='detail-highlightsitem badge badge--square' and contains(text(), 'm²')]";
                 descriptionXPath = ".//div[@class=\"card-annonce__content__description line-clamp\"]/descendant::p";
                 addressXPath = ".//p[@data-v-ce3ef9f4][2]";
                 linkXPath = ".//a[@data-v-ce3ef9f4]";
             }
-
-//                    ".//div[@class='card-annoncecontent']",
-//                    ".//p[contains(@data-v-ce3ef9f4, '')]",
-//                    ".//div[@class='detail-highlightsitem badge badge--square' and contains(text(), '㎡')]",
-//                    "//p[contains(@data-v-ce3ef9f4, '')][3]",
-//                    ".//span[contains(@class, 'detail-prix')]",
-//                    ".//a[@data-v-ce3ef9f4]"
 
             // Création d'une instance de la classe Scraping
             Scraping scraper = new Scraping();
@@ -334,25 +347,40 @@ public class HomeController {
     }
 
     private String choisirVille(String choixVille) {
-        if (choixVille != null && chooseSeLoger.isSelected()) {
-            switch (choixVille) {
-                case "vannes":
-                    return "560260";
-                case "lorient":
-                    return "560121";
-                case "brest":
-                    return "290019";
-                case "quimper":
-                    return "290232";
-                case "guingamp":
-                    return "220070";
-                case "saint-brieuc":
-                    return "220278";
+        if (choixVille != null) {
+            if (chooseSeLoger.isSelected()) {
+                switch (choixVille) {
+                    case "vannes":
+                        return "560260";
+                    case "lorient":
+                        return "560121";
+                    case "brest":
+                        return "290019";
+                    case "quimper":
+                        return "290232";
+                    case "guingamp":
+                        return "220070";
+                    case "saint-brieuc":
+                        return "220278";
+                }
+            } else if (chooseOuestFrance.isSelected()) {
+                switch (choixVille) {
+                    case "vannes":
+                        return "vannes-56-56000";
+                    case "lorient":
+                        return "lorient-56-56100";
+                    case "brest":
+                        return "brest-29-29200";
+                    case "quimper":
+                        return "quimper-29-29000";
+                    case "guingamp":
+                        return "guingamp-22-22200";
+                    case "saint-brieuc":
+                        return "saint-brieuc-22-22000";
+                }
             }
-        } else {
-            return null;
         }
-        return choixVille;
+        return null;
     }
 
     @FXML
@@ -363,25 +391,34 @@ public class HomeController {
         System.out.println("Code de la ville sélectionnée : " + codeVille);
     }
 
-    /**
-     * Méthode pour choisir le code de le type en fonction de la sélection dans la ComboBox
-     */
+
     private String choisirType(String choixType) {
-        if (choixType != null && chooseSeLoger.isSelected()) {
-            switch (choixType) {
-                case "appartement":
-                    return "1";
-                case "maison":
-                    return "2";
-                case "parking/box":
-                    return "3";
-                case "terrain":
-                    return "4";
+        if (choixType != null) {
+            if (chooseSeLoger.isSelected()) {
+                switch (choixType) {
+                    case "appartement":
+                        return "1";
+                    case "maison":
+                        return "2";
+                    case "parking/box":
+                        return "3";
+                    case "terrain":
+                        return "4";
+                }
+            } else if (chooseOuestFrance.isSelected()) {
+                switch (choixType) {
+                    case "appartement":
+                        return "appartement";
+                    case "maison":
+                        return "maison";
+                    case "parking/box":
+                        return "garage";
+                    case "terrain":
+                        return "terrain";
+                }
             }
-        } else {
-            return null;
         }
-        return choixType;
+        return null;
     }
 
     @FXML
