@@ -9,6 +9,7 @@ public class Annonce {
     private String image;
     private String lien;
     private String adresse;
+    private String type;
 
     /**
      * Constructeur d'annonces
@@ -16,15 +17,15 @@ public class Annonce {
      * @param prix
      * @param surface
      * @param description
-     * @param lieuBien
+     * @param adresse
      * @param lien
      */
-    public Annonce(String titre, String prix, String surface, String description, String lieuBien, String lien) {
+    public Annonce(String titre, String prix, String surface, String description, String adresse, String lien) {
         this.titre = titre;
         this.prix = prix;
         this.surface = surface;
         this.description = description;
-        this.adresse = lieuBien;
+        this.adresse = adresse;
         this.lien = lien;
     }
 
@@ -90,6 +91,14 @@ public class Annonce {
 
     public void setAdresse(String adresse) {
         this.adresse = adresse;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override

@@ -23,7 +23,7 @@ public class DaoFactory {
         }
 
         DaoFactory instance = new DaoFactory(
-                "jdbc:mysql://localhost:3306/soutenance2-tests", "root", "");
+                "jdbc:mysql://localhost:3306/soutenance2", "root", "");
         return instance;
     }
 
