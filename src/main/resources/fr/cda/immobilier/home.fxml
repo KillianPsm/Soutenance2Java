@@ -14,90 +14,72 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0"
-            prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="fr.cda.immobilier.controller.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.cda.immobilier.controller.HomeController">
     <children>
         <MenuBar prefWidth="1100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <menus>
                 <Menu fx:id="file" mnemonicParsing="false" text="Fichier">
                     <items>
-                        <MenuItem fx:id="saveInFile" mnemonicParsing="false" onAction="#onSaveFileClick"
-                                  text="Enregistrer dans un fichier"/>
-                        <MenuItem fx:id="sendAMail" mnemonicParsing="false" onAction="#MailScene"
-                                  text="Envoyer un mail"/>
-                        <MenuItem fx:id="saveInDB" mnemonicParsing="false" onAction="#onSaveDBClick"
-                                  text="Enregistrer dans la BD"/>
-                        <MenuItem fx:id="close" mnemonicParsing="false" onAction="#onCloseClick" text="Quitter"/>
+                        <MenuItem fx:id="saveInFile" mnemonicParsing="false" onAction="#onSaveFileClick" text="Enregistrer dans un fichier" />
+                        <MenuItem fx:id="sendAMail" mnemonicParsing="false" onAction="#MailScene" text="Envoyer un mail" />
+                        <MenuItem fx:id="saveInDB" mnemonicParsing="false" onAction="#onSaveDBClick" text="Enregistrer dans la BD" />
+                        <MenuItem fx:id="close" mnemonicParsing="false" onAction="#onCloseClick" text="Quitter" />
                     </items>
                 </Menu>
                 <Menu fx:id="settings" mnemonicParsing="false" text="Paramètres">
                     <items>
-                        <MenuItem fx:id="dbSettings" mnemonicParsing="false" onAction="#SaveScene"
-                                  text="Base de données"/>
+                        <MenuItem fx:id="dbSettings" mnemonicParsing="false" onAction="#SaveScene" text="Base de données" />
                     </items>
                 </Menu>
                 <Menu fx:id="help" mnemonicParsing="false" text="Aide">
                     <items>
-                        <MenuItem fx:id="userGuide" mnemonicParsing="false" onAction="#HelpScene" text="Mode d'emploi"/>
+                        <MenuItem fx:id="userGuide" mnemonicParsing="false" onAction="#HelpScene" text="Mode d'emploi" />
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
-        <Button fx:id="search" layoutX="511.0" layoutY="200.0" mnemonicParsing="false" onAction="#onSearchButtonClick"
-                text="Rechercher" AnchorPane.rightAnchor="513.8"/>
-        <CheckBox fx:id="chooseSeLoger" layoutX="626.0" layoutY="204.0" mnemonicParsing="false" text="SeLoger"/>
-        <CheckBox fx:id="chooseOuestFrance" layoutX="714.0" layoutY="204.0" mnemonicParsing="false"
-                  text="Ouest France"/>
-        <Label layoutX="475.0" layoutY="57.0" text="Type de bien" AnchorPane.topAnchor="60.0"/>
-        <ComboBox fx:id="typeComboBox" layoutX="475.0" layoutY="78.0" onAction="#onTypeComboBoxSelected"
-                  promptText="Choisir un type de bien">
+        <Button fx:id="search" layoutX="511.0" layoutY="200.0" mnemonicParsing="false" onAction="#onSearchButtonClick" text="Rechercher" AnchorPane.rightAnchor="513.8" />
+        <CheckBox fx:id="chooseSeLoger" layoutX="626.0" layoutY="204.0" mnemonicParsing="false" text="SeLoger" />
+        <CheckBox fx:id="chooseOuestFrance" layoutX="714.0" layoutY="204.0" mnemonicParsing="false" text="Ouest France" />
+        <Label layoutX="475.0" layoutY="57.0" text="Type de bien" AnchorPane.topAnchor="60.0" />
+        <ComboBox fx:id="typeComboBox" layoutX="475.0" layoutY="78.0" onAction="#onTypeComboBoxSelected" promptText="Choisir un type de bien">
             <items>
                 <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="appartement"/>
-                    <String fx:value="maison"/>
-                    <String fx:value="parking/box"/>
-                    <String fx:value="terrain"/>
+                    <String fx:value="appartement" />
+                    <String fx:value="maison" />
+                    <String fx:value="parking/box" />
+                    <String fx:value="terrain" />
                 </FXCollections>
             </items>
         </ComboBox>
-        <Label layoutX="170.0" layoutY="130.0" text="Localisation" AnchorPane.leftAnchor="170.0"
-               AnchorPane.topAnchor="130.0"/>
-        <ComboBox fx:id="villeComboBox" layoutX="169.0" layoutY="150.0" onAction="#onVilleComboBoxSelected"
-                  promptText="Choisir une ville">
+        <Label layoutX="170.0" layoutY="130.0" text="Localisation" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="130.0" />
+        <ComboBox fx:id="villeComboBox" layoutX="169.0" layoutY="150.0" onAction="#onVilleComboBoxSelected" promptText="Choisir une ville">
             <items>
                 <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="vannes"/>
-                    <String fx:value="lorient"/>
-                    <String fx:value="brest"/>
-                    <String fx:value="quimper"/>
-                    <String fx:value="guingamp"/>
-                    <String fx:value="saint-brieuc"/>
+                    <String fx:value="vannes" />
+                    <String fx:value="lorient" />
+                    <String fx:value="brest" />
+                    <String fx:value="quimper" />
+                    <String fx:value="guingamp" />
+                    <String fx:value="saint-brieuc" />
                 </FXCollections>
             </items>
         </ComboBox>
-        <Label layoutX="445.0" layoutY="130.0" text="Prix min" AnchorPane.leftAnchor="445.0"
-               AnchorPane.topAnchor="130.0"/>
-        <TextField fx:id="minPrice" layoutX="445.0" layoutY="150.0" prefHeight="25.0" prefWidth="60.0"
-                   promptText="Prix min" AnchorPane.leftAnchor="445.0"/>
-        <Label layoutX="596.0" layoutY="130.0" text="Prix max" AnchorPane.leftAnchor="596.0"
-               AnchorPane.topAnchor="130.0"/>
-        <TextField fx:id="maxPrice" layoutX="596.0" layoutY="150.0" prefHeight="25.0" prefWidth="60.0"
-                   promptText="Prix max" AnchorPane.leftAnchor="596.0" AnchorPane.rightAnchor="444.0"
-                   AnchorPane.topAnchor="150.0"/>
-        <Label layoutX="856.0" layoutY="130.0" text="Surface"/>
-        <TextField fx:id="searchSurface" layoutX="914.0" layoutY="150.0" prefHeight="25.0" prefWidth="73.0"
-                   promptText="Surface" AnchorPane.rightAnchor="170.0"/>
-        <TableView fx:id="searchResult" layoutX="110.0" layoutY="252.0" prefHeight="327.0" prefWidth="879.0"
-                   AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="111.0"
-                   AnchorPane.topAnchor="250.0">
+        <Label layoutX="445.0" layoutY="130.0" text="Prix min" AnchorPane.leftAnchor="445.0" AnchorPane.topAnchor="130.0" />
+        <TextField fx:id="minPrice" layoutX="445.0" layoutY="150.0" prefHeight="25.0" prefWidth="60.0" promptText="Prix min" AnchorPane.leftAnchor="445.0" />
+        <Label layoutX="596.0" layoutY="130.0" text="Prix max" AnchorPane.leftAnchor="596.0" AnchorPane.topAnchor="130.0" />
+        <TextField fx:id="maxPrice" layoutX="596.0" layoutY="150.0" prefHeight="25.0" prefWidth="60.0" promptText="Prix max" AnchorPane.leftAnchor="596.0" AnchorPane.rightAnchor="444.0" AnchorPane.topAnchor="150.0" />
+        <Label layoutX="856.0" layoutY="130.0" text="Surface" />
+        <TextField fx:id="searchSurface" layoutX="914.0" layoutY="150.0" prefHeight="25.0" prefWidth="73.0" promptText="Surface" AnchorPane.rightAnchor="170.0" />
+        <Label fx:id="annonceCountLabel" layoutX="110.0" layoutY="226.0" text="Nombre d'annonces trouvées : " />
+        <TableView fx:id="searchResult" layoutX="110.0" layoutY="252.0" prefHeight="327.0" prefWidth="879.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="111.0" AnchorPane.topAnchor="250.0">
             <columns>
-                <TableColumn fx:id="title" prefWidth="135.0" text="Titre"/>
-                <TableColumn fx:id="price" prefWidth="65.0" text="Prix"/>
-                <TableColumn fx:id="resultSurface" prefWidth="65.0" text="Surface"/>
-                <TableColumn fx:id="description" prefWidth="250.0" text="Description"/>
-                <TableColumn fx:id="place" prefWidth="200.0" text="Lieu"/>
-                <TableColumn fx:id="lien" prefWidth="160.0" text="Lien"/>
+                <TableColumn fx:id="title" prefWidth="135.0" text="Titre" />
+                <TableColumn fx:id="price" prefWidth="65.0" text="Prix" />
+                <TableColumn fx:id="resultSurface" prefWidth="65.0" text="Surface" />
+                <TableColumn fx:id="description" prefWidth="250.0" text="Description" />
+                <TableColumn fx:id="place" prefWidth="200.0" text="Lieu" />
+                <TableColumn fx:id="lien" prefWidth="160.0" text="Lien" />
             </columns>
         </TableView>
     </children>

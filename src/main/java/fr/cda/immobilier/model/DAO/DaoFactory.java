@@ -18,7 +18,7 @@ public class DaoFactory {
         this.password = password;
     }
 
-    public DaoFactory getInstance() {
+    public static DaoFactory getInstance() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -26,7 +26,8 @@ public class DaoFactory {
         }
 
         DaoFactory instance = new DaoFactory(
-                "jdbc:mysql://" + this.server + ":" + this.port + "/" + this.dbname, this.username, this.password);
+                "jdbc:mysql://localhost:3306/soutenance2", "root", "");
+//                "jdbc:mysql://" + this.server + ":" + this.port + "/" + this.dbname, this.username, this.password);
         return instance;
     }
 

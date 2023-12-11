@@ -1,6 +1,7 @@
 package fr.cda.immobilier.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
@@ -22,7 +23,16 @@ public class ModalMailController {
     @FXML
     private TextField enterEmail;
     @FXML
+    private Button sendButton;
+    @FXML
     private Button cancel;
+
+    private File selectedFile;
+
+    public void initialize() {
+        // Désactive le bouton "Envoyer" tant qu'aucun fichier n'est sélectionné
+        sendButton.setDisable(true);
+    }
 
     /**
      * Methode pour fermer la modale en cliquant sur un bouton
@@ -30,6 +40,25 @@ public class ModalMailController {
     public void onCloseClick() {
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
+    }
+
+    private void showConfirmationDialog() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText(null);
+        alert.setContentText("Le mail a été envoyé avec succès !");
+        alert.showAndWait();
+    }
+
+    @FXML
+    private void onAjoutFichierClick() {
+        selectedFile = showFileChooser();
+
+        // Vérifie si un fichier a été sélectionné
+        if (selectedFile != null) {
+            // Active le bouton "Envoyer" si un fichier est sélectionné
+            sendButton.setDisable(false);
+        }
     }
 
     private File showFileChooser() {
@@ -50,8 +79,6 @@ public class ModalMailController {
         // Configure API key authorization: api-key
         ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("api-key");
         apiKey.setApiKey("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");
-
-        File selectedFile = showFileChooser();
 
         // Vérifie si un fichier a été sélectionné
         if (selectedFile != null) {
@@ -102,6 +129,9 @@ public class ModalMailController {
                 CreateSmtpEmail response = api.sendTransacEmail(sendSmtpEmail);
                 // Affichage de la réponse
                 System.out.println(response.toString());
+                // Affichez la boîte de dialogue de confirmation
+                showConfirmationDialog();
+                onCloseClick();
             } catch (Exception e) {
                 // Gestion des éventuelles exceptions pouvant survenir pendant l'exécution
                 System.out.println("Une exception s'est produite : " + e.getMessage());

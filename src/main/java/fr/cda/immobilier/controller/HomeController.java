@@ -62,6 +62,10 @@ public class HomeController {
     private TableColumn<Annonce, String> lien;
 
     @FXML
+    private Label annonceCountLabel;
+
+
+    @FXML
     private void initialize() {
         // Créer un BooleanBinding qui est vrai si au moins une case à cocher est sélectionnée
         BooleanBinding isAnyCheckBoxSelected = Bindings.or(chooseSeLoger.selectedProperty(), chooseOuestFrance.selectedProperty());
@@ -245,6 +249,9 @@ public class HomeController {
             searchResult.setItems(annonceList);
             searchResult.refresh();
 
+            // Mettez à jour le texte de l'étiquette avec le nombre d'annonces
+            annonceCountLabel.setText("Nombre d'annonces trouvées : " + annonces.size());
+
             // Log d'information indiquant que les données ont été mises à jour dans la TableView
             logger.info("Données mises à jour dans la TableView.");
             System.out.println(url);
@@ -295,17 +302,30 @@ public class HomeController {
         String documentsPath = userHome + "/Documents";
         fileChooser.setInitialDirectory(new File(documentsPath));
 
+        // Définissez un filtre d'extension par défaut pour les fichiers texte
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Fichiers texte (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extFilter);
+
         // Affichez la boîte de dialogue pour choisir un fichier à sauvegarder
         File selectedFile = fileChooser.showSaveDialog(new Stage());
 
         if (selectedFile != null) {
-            // Faites quelque chose avec le fichier sélectionné (dans cet exemple, imprimez simplement le chemin absolu du fichier)
+            // Assurez-vous que le fichier a l'extension .txt
+            if (!selectedFile.getName().toLowerCase().endsWith(".txt")) {
+                selectedFile = new File(selectedFile.getAbsolutePath() + ".txt");
+            }
+
+            // Faites quelque chose avec le fichier sélectionné
             System.out.println("Fichier sélectionné : " + selectedFile.getAbsolutePath());
 
             // Appel à la méthode pour sauvegarder les annonces dans le fichier sélectionné
             saveToFile(selectedFile);
+
+            // Affichez la boîte de dialogue de confirmation avec le contexte "fichier texte"
+            showConfirmationDialog("fichier texte");
         }
     }
+
 
     /**
      * Methode qui fait la mise en forme de la sauvegarde dans un fichier
@@ -341,6 +361,26 @@ public class HomeController {
         }
     }
 
+    private void showConfirmationDialog(String context) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText(null);
+
+        // Ajustez le message en fonction du contexte
+        switch (context.toLowerCase()) {
+            case "base de données":
+                alert.setContentText("Annonces enregistrées dans la base de données.");
+                break;
+            case "fichier texte":
+                alert.setContentText("Annonces enregistrées dans un fichier texte.");
+                break;
+            default:
+                alert.setContentText("Opération réussie.");
+        }
+
+        alert.showAndWait();
+    }
+
     /**
      * Methode pour sauvegader les annonces dans la base de donnees
      */
@@ -362,6 +402,9 @@ public class HomeController {
 
             // Log d'information indiquant que les annonces ont été enregistrées dans la base de données
             logger.info("Annonces enregistrées dans la base de données.");
+
+            // Affichez la boîte de dialogue de confirmation avec le contexte "base de données"
+            showConfirmationDialog("base de données");
         } catch (SQLException e) {
             // Gestion des exceptions SQL : Affichage de la trace de la pile en cas d'erreur
             e.printStackTrace();
@@ -370,6 +413,7 @@ public class HomeController {
 
     /**
      * Methode pour selectionner une ville ce qui modifira l'url en fonction du return
+     *
      * @param choixVille
      * @return
      */
@@ -420,6 +464,7 @@ public class HomeController {
 
     /**
      * Methode pour selectionner un type de bien ce qui modifira l'url en fonction du return
+     *
      * @param choixType
      * @return
      */

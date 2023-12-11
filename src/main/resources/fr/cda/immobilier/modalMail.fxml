@@ -12,8 +12,9 @@
          <font>
             <Font name="Caviar Dreams Bold" size="12.0" />
          </font></Label>
-        <TextField fx:id="enterEmail" layoutX="100.0" layoutY="138.0" prefHeight="25.0" prefWidth="200.0" promptText="Adresse mail de l'epéditeur" />
-        <Button fx:id="sendMail" layoutX="126.0" layoutY="199.0" mnemonicParsing="false" onAction="#sendAMail" text="Envoyer" />
-        <Button fx:id="cancel" layoutX="217.0" layoutY="199.0" mnemonicParsing="false" onAction="#onCloseClick" text="Annuler" />
+        <TextField fx:id="enterEmail" layoutX="112.0" layoutY="124.0" prefHeight="25.0" prefWidth="200.0" promptText="Adresse mail de l'epéditeur" />
+        <Button fx:id="sendButton" layoutX="130.0" layoutY="234.0" mnemonicParsing="false" onAction="#sendAMail" text="Envoyer" AnchorPane.leftAnchor="130.0" />
+        <Button fx:id="cancel" layoutX="215.0" layoutY="234.0" mnemonicParsing="false" onAction="#onCloseClick" text="Annuler" AnchorPane.rightAnchor="130.0" />
+      <Button fx:id="ajoutFichier" layoutX="132.0" layoutY="163.0" mnemonicParsing="false" onAction="#onAjoutFichierClick" text="Choisir un fichier à envoyer" />
     </children>
 </AnchorPane>
