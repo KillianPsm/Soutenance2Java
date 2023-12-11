@@ -256,10 +256,34 @@ public class HomeController {
             // Log d'information indiquant que les données ont été mises à jour dans la TableView
             logger.info("Données mises à jour dans la TableView.");
             System.out.println(url);
+            majLiens();
         } catch (IOException e) {
             // Gestion des erreurs : Affichage de la trace de la pile en cas d'erreur
             e.printStackTrace();
-            // Gérer les erreurs de scraping ici
+        }
+    }
+
+    private void majLiens() {
+        // Récupération des annonces depuis la TableView
+        List<Annonce> annonces = searchResult.getItems();
+
+        // Parcours de la liste des annonces
+        for (Annonce annonce : annonces) {
+            // On vérifie si le lien commence par "/"
+            if (annonce.getLien().startsWith("/")) {
+                // Ajoutez une variable indiquant le site sélectionné
+                String selectedSite = chooseSeLoger.isSelected() ? "seloger" : (chooseOuestFrance.isSelected() ? "ouestfrance" : "");
+
+                // Modifier le lien en fonction du site sélectionné
+                switch (selectedSite) {
+                    case "seloger":
+                        annonce.setLien("https://www.seloger.com" + annonce.getLien());
+                        break;
+                    case "ouestfrance":
+                        annonce.setLien("https://www.ouestfrance-immo.com" + annonce.getLien());
+                        break;
+                }
+            }
         }
     }
 
