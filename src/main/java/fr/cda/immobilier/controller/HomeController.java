@@ -96,8 +96,6 @@ public class HomeController {
             stage.setScene(scene);
             // Définition du type de modality de la fenêtre (fenêtre modale bloquant les interactions avec les autres fenêtres)
             stage.initModality(Modality.APPLICATION_MODAL);
-            // Affichage de la fenêtre modale et attente de sa fermeture (showAndWait bloque l'exécution jusqu'à ce que la fenêtre soit fermée)
-            stage.showAndWait();
             // Affichage de la fenêtre (peut être redondant ici)
             stage.show();
         } catch (Exception e) {
@@ -118,7 +116,6 @@ public class HomeController {
             stage.setTitle("Sauvegarder les annonces dans une base de données");
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.showAndWait();
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -137,7 +134,6 @@ public class HomeController {
             stage.setTitle("Mode d'emploi de l'application");
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.showAndWait();
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -176,22 +172,22 @@ public class HomeController {
             String surfaceParam = "";
 
 
-            // Vérifier les cases cochées et choisir le site en conséquence
+            // Vérifier la case cochée et choisir le site en conséquence
+            // Sur seloger
             if (chooseSeLoger.isSelected()) {
-                // Vérifiez si le champ maxPrice est vide ou non
+                // Vérifier si les champs de prix sont vide ou non
+                // Mettre à jour l'url en fonction avec la/les valeur saisie
                 if (!pMin.isEmpty() && !pMax.isEmpty()) {
-                    // Si le champ maxPrice n'est pas vide, construisez la partie correspondante de l'URL
                     pParam = "&price=" + pMin + "/" + pMax;
                 } else if (!pMin.isEmpty()) {
                     pParam = "&price=" + pMin + "/NaN";
                 } else if (!pMax.isEmpty()) {
-                    // Si le champ maxPrice n'est pas vide, construisez la partie correspondante de l'URL
                     pParam = "&price=NaN/" + pMax;
                 }
 
-                // Vérifiez si le champ surface est vide ou non
+                // Vérifier si le champ surface est vide ou non
                 if (!surface.isEmpty()) {
-                    // Si le champ maxPrice n'est pas vide, construisez la partie correspondante de l'URL
+                    // Mettre à jour l'url en fonction avec la valeur saisie
                     surfaceParam = "&surface=NaN/" + surface;
                 }
 
@@ -205,21 +201,17 @@ public class HomeController {
                 addressXPath = ".//div[@data-test='sl.address']";
                 linkXPath = ".//a[@data-testid='sl.explore.coveringLink']";
 
+                // Sur ouestfranceimmo
             } else if (chooseOuestFrance.isSelected()) {
-                // Vérifiez si le champ maxPrice est vide ou non
                 if (!pMin.isEmpty() && !pMax.isEmpty()) {
-                    // Si le champ maxPrice n'est pas vide, construisez la partie correspondante de l'URL
                     pParam = "?prix=" + pMin + "_" + pMax;
                 } else if (!pMin.isEmpty()) {
                     pParam = "?prix=" + pMin + "_0";
                 } else if (!pMax.isEmpty()) {
-                    // Si le champ maxPrice n'est pas vide, construisez la partie correspondante de l'URL
                     pParam = "?prix=0_" + pMax;
                 }
 
-                // Vérifiez si le champ surface est vide ou non
                 if (!surface.isEmpty()) {
-                    // Si le champ maxPrice n'est pas vide, construisez la partie correspondante de l'URL
                     surfaceParam = "&surface=0_ " + surface;
                 }
                 // URL Ouest France Immobilier
@@ -263,6 +255,9 @@ public class HomeController {
         }
     }
 
+    /**
+     * Methode pour modifier les liens d'annonces incomplets
+     */
     private void majLiens() {
         // Récupération des annonces depuis la TableView
         List<Annonce> annonces = searchResult.getItems();
@@ -287,6 +282,9 @@ public class HomeController {
         }
     }
 
+    /**
+     * Methode pour sauvegarder les annonces au clique
+     */
     @FXML
     public void onSaveFileClick() {
         // Création d'une instance de FileChooser
@@ -370,6 +368,11 @@ public class HomeController {
         }
     }
 
+    /**
+     * Methode pour selectionner une ville ce qui modifira l'url en fonction du return
+     * @param choixVille
+     * @return
+     */
     private String choisirVille(String choixVille) {
         if (choixVille != null) {
             if (chooseSeLoger.isSelected()) {
@@ -415,7 +418,11 @@ public class HomeController {
         System.out.println("Code de la ville sélectionnée : " + codeVille);
     }
 
-
+    /**
+     * Methode pour selectionner un type de bien ce qui modifira l'url en fonction du return
+     * @param choixType
+     * @return
+     */
     private String choisirType(String choixType) {
         if (choixType != null) {
             if (chooseSeLoger.isSelected()) {
