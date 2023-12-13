@@ -3,40 +3,51 @@ package fr.cda.immobilier.model.DAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 public class DaoFactory {
-    private String url;
-    private String server;
-    private String dbname;
-    private String port;
-    private String username;
-    private String password;
+    private static Connection connect = null;
+    public static String DEFAULT_SERVER = "localhost";
+    public static String DEFAULT_PORT = "3306";
+    public static String DEFAULT_DB_NAME = "soutenance2";
+    public static String DEFAULT_USERNAME = "root";
+    public static String DEFAULT_PASSWORD = "";
 
-    public DaoFactory(String url, String username, String password) {
-        this.url = url;
-        this.username = username;
-        this.password = password;
-    }
+    public DaoFactory() {}
 
-    public static DaoFactory getInstance() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-
+    public static Connection getInstance() throws SQLException {
+        if (connect == null) {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                String jdbcURL = "jdbc:mysql://" + DEFAULT_SERVER + ":" + DEFAULT_PORT + "/" + DEFAULT_DB_NAME;
+                String username = DEFAULT_USERNAME;
+                String password = DEFAULT_PASSWORD;
+                connect = DriverManager.getConnection(jdbcURL, username, password);
+                if (connect != null) {
+                    System.out.println("Connexion a la bd reussie");
+                } else {
+                    System.out.println("Probleme de connexion");
+                }
+            } catch (SQLException e) {
+                System.out.println("Echec de la tentative de connexion : " + e.getMessage() + Arrays.toString(e.getStackTrace()));
+                throw e;
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
         }
-
-        DaoFactory instance = new DaoFactory(
-                "jdbc:mysql://localhost:3306/soutenance2", "root", "");
-//                "jdbc:mysql://" + this.server + ":" + this.port + "/" + this.dbname, this.username, this.password);
-        return instance;
+        return connect;
     }
 
     public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(url, username, password);
+        return DaoFactory.getInstance();
     }
 
     // Récupération du Dao
     public AnnonceDAOImpl getAnnonceDAO() throws SQLException {
         return new AnnonceDAOImpl(this);
+    }
+
+    public static void clearConn() {
+        connect = null;
     }
 }

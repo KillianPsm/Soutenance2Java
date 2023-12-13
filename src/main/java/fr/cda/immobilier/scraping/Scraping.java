@@ -69,41 +69,41 @@ public class Scraping {
             // On vérifie la taille des différentes parties des annonces pour mettre une valeur par defaut si vide
             String title;
             if (i < titles.size()) {
-                title = titles.get(i).getTextContent();
+                title = titles.get(i).getTextContent().trim();
             } else {
                 title = "Titre non disponible";
             }
 
             String price;
             if (i < prices.size()) {
-                price = prices.get(i).getTextContent();
+                price = prices.get(i).getTextContent().trim();
             } else {
                 price = "Prix non disponible";
             }
 
             String surface;
             if (i < surfaces.size()) {
-                surface = surfaces.get(i).getTextContent();
+                surface = surfaces.get(i).getTextContent().trim();
             } else {
                 surface = "Surface non disponible";
             }
 
             String description;
             if (i < descriptions.size()) {
-                description = descriptions.get(i).getTextContent();
+                description = descriptions.get(i).getTextContent().trim();
             } else {
                 description = "Description non disponible";
             }
 
             String address;
             if (i < addresses.size()) {
-                address = addresses.get(i).getTextContent();
+                address = addresses.get(i).getTextContent().trim();
             } else {
                 address = "Adresse non disponible";
             }
 
             // Utilisation de getAttribute("href") pour récupérer l'URL du lien
-            String link = i < links.size() ? links.get(i).getAttribute("href") : "";
+            String link = i < links.size() ? links.get(i).getAttribute("href").trim() : "";
 
             // Création de l'objet Annonce et ajout à la liste
             Annonce annonce = new Annonce(title, price, surface, description, address, link);

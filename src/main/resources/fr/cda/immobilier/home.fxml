@@ -28,7 +28,7 @@
                 </Menu>
                 <Menu fx:id="settings" mnemonicParsing="false" text="Paramètres">
                     <items>
-                        <MenuItem fx:id="dbSettings" mnemonicParsing="false" onAction="#SaveScene" text="Base de données" />
+                        <MenuItem fx:id="dbSettings" mnemonicParsing="false" onAction="#DBParamScene" text="Base de données" />
                     </items>
                 </Menu>
                 <Menu fx:id="help" mnemonicParsing="false" text="Aide">

@@ -30,7 +30,9 @@ public class AnnonceDAOImpl implements AnnonceDAO {
         try {
             this.conn = daoFactory.getConnection();
         } catch (SQLException e) {
-            throw new SQLException("Connexion à la bdd impossible.");
+            System.err.println("SQLException: " + e.getMessage());
+            System.err.println("SQLState: " + e.getSQLState());
+            System.err.println("VendorError: " + e.getErrorCode());
         }
     }
 

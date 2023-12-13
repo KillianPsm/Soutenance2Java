@@ -21,7 +21,7 @@
                 <Font name="Caviar Dreams" size="12.0"/>
             </font>
         </Label>
-        <TextField fx:id="hostName" layoutX="300.0" layoutY="146.0" promptText="Nom d'host ou adresse IP"
+        <TextField fx:id="serverName" layoutX="300.0" layoutY="146.0" promptText="Nom d'host ou adresse IP"
                    AnchorPane.topAnchor="130.0"/>
         <Label layoutX="120.0" layoutY="194.0" text="Nom de la base de données :">
             <font>
@@ -50,7 +50,8 @@
         </Label>
         <TextField fx:id="password" layoutX="300.0" layoutY="369.0" promptText="Mdp utilisateur"
                    AnchorPane.topAnchor="370.0"/>
-        <Button fx:id="validate" layoutX="211.0" layoutY="433.0" mnemonicParsing="false" text="Valider"
+        <Button fx:id="validate" layoutX="211.0" layoutY="433.0" mnemonicParsing="false" onAction="#onValidateClick"
+                text="Valider"
                 AnchorPane.leftAnchor="210.0"/>
         <Button fx:id="close" layoutX="323.0" layoutY="433.0" mnemonicParsing="false" onAction="#onCloseClick"
                 text="Fermer" AnchorPane.rightAnchor="210.0"/>

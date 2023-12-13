@@ -111,7 +111,7 @@ public class HomeController {
     /**
      * Methode qui ouvre une fenetre modale pour modifier les parametres de la base de donnees
      */
-    public void SaveScene() {
+    public void DBParamScene() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(SoutenanceApplication.class.getResource("modalBDParam.fxml"));
@@ -388,7 +388,7 @@ public class HomeController {
     private void onSaveDBClick() {
         try {
             // Obtention d'une instance de la factory DAO
-            DaoFactory daoFactory = DaoFactory.getInstance();
+            DaoFactory daoFactory = new DaoFactory();
             // Obtention d'une instance du DAO d'Annonce
             AnnonceDAO annonceDAO = daoFactory.getAnnonceDAO();
 
