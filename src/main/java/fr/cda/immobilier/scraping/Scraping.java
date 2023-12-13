@@ -127,8 +127,7 @@ public class Scraping {
      * @throws IOException
      */
     // Méthode pour effectuer le scraping et afficher les données extraites
-    public List<Annonce> scrapeAndPrint(String url, String priceXPath, String titleXPath, String surfaceXPath, String descriptionXPath,
-                                        String addressXPath, String linkXPath) throws IOException {
+    public List<Annonce> scrapeAndPrint(String url, String priceXPath, String titleXPath, String surfaceXPath, String descriptionXPath, String addressXPath, String linkXPath) throws IOException {
         // Appel de la méthode scrape pour obtenir la liste d'annonces
         List<Annonce> annonces = scrape(url, priceXPath, titleXPath, surfaceXPath, descriptionXPath, addressXPath, linkXPath);
 

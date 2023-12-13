@@ -9,6 +9,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -71,8 +72,8 @@
         <TextField fx:id="maxPrice" layoutX="596.0" layoutY="150.0" prefHeight="25.0" prefWidth="60.0" promptText="Prix max" AnchorPane.leftAnchor="596.0" AnchorPane.rightAnchor="444.0" AnchorPane.topAnchor="150.0" />
         <Label layoutX="856.0" layoutY="130.0" text="Surface" />
         <TextField fx:id="searchSurface" layoutX="914.0" layoutY="150.0" prefHeight="25.0" prefWidth="73.0" promptText="Surface" AnchorPane.rightAnchor="170.0" />
-        <Label fx:id="annonceCountLabel" layoutX="110.0" layoutY="226.0" text="Nombre d'annonces trouvées : " />
-        <TableView fx:id="searchResult" layoutX="110.0" layoutY="252.0" prefHeight="327.0" prefWidth="879.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="111.0" AnchorPane.topAnchor="250.0">
+        <Label fx:id="annonceCountLabel" layoutX="110.0" layoutY="217.0" text="Nombre d'annonces trouvées : " />
+        <TableView fx:id="searchResult" layoutX="110.0" layoutY="235.0" prefHeight="327.0" prefWidth="879.0" AnchorPane.bottomAnchor="35.39999999999998" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="111.60000000000002" AnchorPane.topAnchor="235.0">
             <columns>
                 <TableColumn fx:id="title" prefWidth="135.0" text="Titre" />
                 <TableColumn fx:id="price" prefWidth="65.0" text="Prix" />
@@ -82,5 +83,6 @@
                 <TableColumn fx:id="lien" prefWidth="160.0" text="Lien" />
             </columns>
         </TableView>
+      <ProgressBar fx:id="progressBar" layoutX="450.0" layoutY="676.0" prefWidth="200.0" progress="0.0" visible="false" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="449.6" />
     </children>
 </AnchorPane>
